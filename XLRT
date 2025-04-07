@@ -1,175 +1,175 @@
 import { useState } from "react";
- import { User, Briefcase, Sparkles, Globe, BarChart3, Settings2, Mail } from "lucide-react";
- 
- export default function Home() {
-   const [showInfluencerDetails, setShowInfluencerDetails] = useState(false);
-   const [showBrandDetails, setShowBrandDetails] = useState(false);
-   const [showMatchingDetails, setShowMatchingDetails] = useState(false);
-   const [showWebDevDetails, setShowWebDevDetails] = useState(false);
-   const [showAnalyticsDetails, setShowAnalyticsDetails] = useState(false);
-   const [showAutomationDetails, setShowAutomationDetails] = useState(false);
-   const [showContactForm, setShowContactForm] = useState(false);
-   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
- 
-   const handleInputChange = (e) => {
-     const { name, value } = e.target;
-     setFormData({ ...formData, [name]: value });
-   };
- 
-   return (
-     <main className="min-h-screen bg-gradient-to-br from-[#0f172a] via-[#1e3a5f] to-[#0f172a] text-white p-8 font-sans relative">
-       <header className="text-center py-14 sticky top-0 z-50 bg-[#0f172a]/90 backdrop-blur-sm">
-         <h1 className="text-6xl font-extrabold tracking-tight font-mono text-blue-300">XLR8</h1>
-         <p className="text-xl text-gray-300 mt-4 font-light">Where Influencers & Brands Connect</p>
-       </header>
- 
-       <section className="max-w-4xl mx-auto text-center my-14">
-         <h2 className="text-4xl font-semibold mb-6 font-serif">What We Do</h2>
-         <p className="text-gray-300 text-lg leading-relaxed">
-           XLR8 is a powerful platform crafted for small to mid-range influencers and brands looking to collaborate.
-           Our mission is to empower influencers by showcasing their niche and helping brands connect with them through smart, data-driven matches.
-           Whether you're building your media kit or searching for the perfect influencer to launch your campaign, XLR8 is your go-to hub for meaningful collaborations.
-         </p>
-       </section>
- 
-       <section className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto my-14">
-         {[{
-           icon: <User className="text-blue-400" />, title: "For Influencers", state: showInfluencerDetails, setState: setShowInfluencerDetails,
-           summary: "Build your media kit, set your rates, and get discovered by brands.",
-           details: [
-             "Create and customize your influencer profile",
-             "Set pricing for different types of collaborations",
-             "Analytics dashboard to track your reach",
-             "In-app messaging with potential brand partners",
-             "Secure payments and contract generation",
-             "Promotional tools to boost your visibility"
-           ]
-         }, {
-           icon: <Briefcase className="text-green-400" />, title: "For Brands", state: showBrandDetails, setState: setShowBrandDetails,
-           summary: "Filter influencers by niche, reach, and engagement. Find your perfect match.",
-           details: [
-             "Advanced filtering tools to find the right influencer",
-             "Compare pricing and performance metrics",
-             "View verified influencer portfolios and past campaigns",
-             "Campaign management dashboard",
-             "Direct communication and contract handling",
-             "Performance tracking and ROI insights"
-           ]
-         }, {
-           icon: <Sparkles className="text-yellow-400" />, title: "Smart Matching", state: showMatchingDetails, setState: setShowMatchingDetails,
-           summary: "AI-based recommendations to match influencers and brands efficiently.",
-           details: [
-             "Real-time matching based on goals and interests",
-             "Machine learning to optimize suggestions over time",
-             "Match scoring based on audience overlap",
-             "Notification system for high-potential matches",
-             "Continual learning from campaign outcomes",
-             "Collaborative tools for easy onboarding and communication"
-           ]
-         }, {
-           icon: <Globe className="text-purple-400" />, title: "Website Building", state: showWebDevDetails, setState: setShowWebDevDetails,
-           summary: "Custom website development services tailored for business needs.",
-           details: [
-             "Responsive and modern website design",
-             "SEO optimized architecture",
-             "CMS integrations and custom admin panels",
-             "Landing pages and e-commerce platforms",
-             "Technical support and maintenance"
-           ]
-         }, {
-           icon: <BarChart3 className="text-pink-400" />, title: "Data Analytics", state: showAnalyticsDetails, setState: setShowAnalyticsDetails,
-           summary: "Convert data into actionable insights for your business.",
-           details: [
-             "Business intelligence dashboards",
-             "Customer behavior analysis",
-             "Sales and performance tracking",
-             "Real-time reporting tools",
-             "Predictive analytics & trend forecasting"
-           ]
-         }, {
-           icon: <Settings2 className="text-orange-400" />, title: "Automation Services", state: showAutomationDetails, setState: setShowAutomationDetails,
-           summary: "Streamline operations with automated tools and workflows.",
-           details: [
-             "Task scheduling and process automation",
-             "CRM & ERP system integrations",
-             "Workflow optimization",
-             "Notification and alert systems",
-             "Automated data entry and reporting"
-           ]
-         }].map((box, index) => (
-           <div
-             key={index}
-             className="bg-[#1e293b] p-8 rounded-2xl shadow-xl transition-all transform hover:scale-105 hover:bg-[#334155] cursor-pointer overflow-hidden"
-             onMouseEnter={() => box.setState(true)}
-             onMouseLeave={() => box.setState(false)}
-           >
-             <div className="flex items-center gap-3 mb-3">
-               {box.icon}
-               <h3 className="text-3xl font-bold font-serif">{box.title}</h3>
-             </div>
-             <p className="text-gray-300 text-base">{box.summary}</p>
-             {box.state && (
-               <ul className="mt-4 text-sm text-gray-300 list-disc list-inside space-y-1">
-                 {box.details.map((item, i) => <li key={i}>{item}</li>)}
-               </ul>
-             )}
-           </div>
-         ))}
-       </section>
- 
-       {/* Contact Floating Button */}
-       <button
-         className="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg z-50"
-         onClick={() => setShowContactForm(!showContactForm)}
-       >
-         <Mail />
-       </button>
- 
-       {/* Contact Form Modal */}
-       {showContactForm && (
-         <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-50">
-           <div className="bg-[#1e293b] p-8 rounded-2xl shadow-2xl w-full max-w-md relative">
-             <button
-               onClick={() => setShowContactForm(false)}
-               className="absolute top-3 right-4 text-gray-400 hover:text-white"
-             >✕</button>
-             <h3 className="text-2xl font-semibold mb-4 text-white">Contact Us</h3>
-             <form className="space-y-4">
-               <input
-                 type="text"
-                 name="name"
-                 placeholder="Your Name"
-                 value={formData.name}
-                 onChange={handleInputChange}
-                 className="w-full p-2 rounded bg-[#334155] text-white placeholder-gray-400"
-               />
-               <input
-                 type="email"
-                 name="email"
-                 placeholder="Your Email"
-                 value={formData.email}
-                 onChange={handleInputChange}
-                 className="w-full p-2 rounded bg-[#334155] text-white placeholder-gray-400"
-               />
-               <textarea
-                 name="message"
-                 placeholder="Your Message"
-                 value={formData.message}
-                 onChange={handleInputChange}
-                 rows="4"
-                 className="w-full p-2 rounded bg-[#334155] text-white placeholder-gray-400"
-               ></textarea>
-               <button type="submit" className="bg-blue-600 hover:bg-blue-700 w-full py-2 rounded text-white font-semibold">
-                 Send Message
-               </button>
-             </form>
-           </div>
-         </div>
-       )}
- 
-       <footer className="text-center text-gray-400 py-8 border-t border-gray-700 mt-10">
-         &copy; {new Date().getFullYear()} XLR8. All rights reserved.
-       </footer>
-     </main>
-   );
- }
+import { User, Briefcase, Sparkles, Globe, BarChart3, Settings2, Mail } from "lucide-react";
+
+export default function Home() {
+  const [showInfluencerDetails, setShowInfluencerDetails] = useState(false);
+  const [showBrandDetails, setShowBrandDetails] = useState(false);
+  const [showMatchingDetails, setShowMatchingDetails] = useState(false);
+  const [showWebDevDetails, setShowWebDevDetails] = useState(false);
+  const [showAnalyticsDetails, setShowAnalyticsDetails] = useState(false);
+  const [showAutomationDetails, setShowAutomationDetails] = useState(false);
+  const [showContactForm, setShowContactForm] = useState(false);
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  return (
+    <main className="min-h-screen bg-gradient-to-br from-[#0f172a] via-[#1e3a5f] to-[#0f172a] text-white p-8 font-sans relative">
+      <header className="text-center py-14 sticky top-0 z-50 bg-[#0f172a]/90 backdrop-blur-sm">
+        <h1 className="text-6xl font-extrabold tracking-tight font-mono text-blue-300">XLR8</h1>
+        <p className="text-xl text-gray-300 mt-4 font-light">Where Influencers & Brands Connect</p>
+      </header>
+
+      <section className="max-w-4xl mx-auto text-center my-14">
+        <h2 className="text-4xl font-semibold mb-6 font-serif">What We Do</h2>
+        <p className="text-gray-300 text-lg leading-relaxed">
+          XLR8 is a powerful platform crafted for small to mid-range influencers and brands looking to collaborate.
+          Our mission is to empower influencers by showcasing their niche and helping brands connect with them through smart, data-driven matches.
+          Whether you're building your media kit or searching for the perfect influencer to launch your campaign, XLR8 is your go-to hub for meaningful collaborations.
+        </p>
+      </section>
+
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto my-14">
+        {[{
+          icon: <User className="text-blue-400" />, title: "For Influencers", state: showInfluencerDetails, setState: setShowInfluencerDetails,
+          summary: "Build your media kit, set your rates, and get discovered by brands.",
+          details: [
+            "Create and customize your influencer profile",
+            "Set pricing for different types of collaborations",
+            "Analytics dashboard to track your reach",
+            "In-app messaging with potential brand partners",
+            "Secure payments and contract generation",
+            "Promotional tools to boost your visibility"
+          ]
+        }, {
+          icon: <Briefcase className="text-green-400" />, title: "For Brands", state: showBrandDetails, setState: setShowBrandDetails,
+          summary: "Filter influencers by niche, reach, and engagement. Find your perfect match.",
+          details: [
+            "Advanced filtering tools to find the right influencer",
+            "Compare pricing and performance metrics",
+            "View verified influencer portfolios and past campaigns",
+            "Campaign management dashboard",
+            "Direct communication and contract handling",
+            "Performance tracking and ROI insights"
+          ]
+        }, {
+          icon: <Sparkles className="text-yellow-400" />, title: "Smart Matching", state: showMatchingDetails, setState: setShowMatchingDetails,
+          summary: "AI-based recommendations to match influencers and brands efficiently.",
+          details: [
+            "Real-time matching based on goals and interests",
+            "Machine learning to optimize suggestions over time",
+            "Match scoring based on audience overlap",
+            "Notification system for high-potential matches",
+            "Continual learning from campaign outcomes",
+            "Collaborative tools for easy onboarding and communication"
+          ]
+        }, {
+          icon: <Globe className="text-purple-400" />, title: "Website Building", state: showWebDevDetails, setState: setShowWebDevDetails,
+          summary: "Custom website development services tailored for business needs.",
+          details: [
+            "Responsive and modern website design",
+            "SEO optimized architecture",
+            "CMS integrations and custom admin panels",
+            "Landing pages and e-commerce platforms",
+            "Technical support and maintenance"
+          ]
+        }, {
+          icon: <BarChart3 className="text-pink-400" />, title: "Data Analytics", state: showAnalyticsDetails, setState: setShowAnalyticsDetails,
+          summary: "Convert data into actionable insights for your business.",
+          details: [
+            "Business intelligence dashboards",
+            "Customer behavior analysis",
+            "Sales and performance tracking",
+            "Real-time reporting tools",
+            "Predictive analytics & trend forecasting"
+          ]
+        }, {
+          icon: <Settings2 className="text-orange-400" />, title: "Automation Services", state: showAutomationDetails, setState: setShowAutomationDetails,
+          summary: "Streamline operations with automated tools and workflows.",
+          details: [
+            "Task scheduling and process automation",
+            "CRM & ERP system integrations",
+            "Workflow optimization",
+            "Notification and alert systems",
+            "Automated data entry and reporting"
+          ]
+        }].map((box, index) => (
+          <div
+            key={index}
+            className="bg-[#1e293b] p-8 rounded-2xl shadow-xl transition-all transform hover:scale-105 hover:bg-[#334155] cursor-pointer overflow-hidden"
+            onMouseEnter={() => box.setState(true)}
+            onMouseLeave={() => box.setState(false)}
+          >
+            <div className="flex items-center gap-3 mb-3">
+              {box.icon}
+              <h3 className="text-3xl font-bold font-serif">{box.title}</h3>
+            </div>
+            <p className="text-gray-300 text-base">{box.summary}</p>
+            {box.state && (
+              <ul className="mt-4 text-sm text-gray-300 list-disc list-inside space-y-1">
+                {box.details.map((item, i) => <li key={i}>{item}</li>)}
+              </ul>
+            )}
+          </div>
+        ))}
+      </section>
+
+      {/* Contact Floating Button */}
+      <button
+        className="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg z-50"
+        onClick={() => setShowContactForm(!showContactForm)}
+      >
+        <Mail />
+      </button>
+
+      {/* Contact Form Modal */}
+      {showContactForm && (
+        <div className="fixed inset-0 bg-black/60 flex justify-center items-center z-50">
+          <div className="bg-[#1e293b] p-8 rounded-2xl shadow-2xl w-full max-w-md relative">
+            <button
+              onClick={() => setShowContactForm(false)}
+              className="absolute top-3 right-4 text-gray-400 hover:text-white"
+            >✕</button>
+            <h3 className="text-2xl font-semibold mb-4 text-white">Contact Us</h3>
+            <form className="space-y-4">
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                value={formData.name}
+                onChange={handleInputChange}
+                className="w-full p-2 rounded bg-[#334155] text-white placeholder-gray-400"
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                value={formData.email}
+                onChange={handleInputChange}
+                className="w-full p-2 rounded bg-[#334155] text-white placeholder-gray-400"
+              />
+              <textarea
+                name="message"
+                placeholder="Your Message"
+                value={formData.message}
+                onChange={handleInputChange}
+                rows="4"
+                className="w-full p-2 rounded bg-[#334155] text-white placeholder-gray-400"
+              ></textarea>
+              <button type="submit" className="bg-blue-600 hover:bg-blue-700 w-full py-2 rounded text-white font-semibold">
+                Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      <footer className="text-center text-gray-400 py-8 border-t border-gray-700 mt-10">
+        &copy; {new Date().getFullYear()} XLR8. All rights reserved.
+      </footer>
+    </main>
+  );
+}
